@@ -1,0 +1,173 @@
+{
+  "schema": "hardware-circuit-netlist-v1",
+  "title": "RP2040 Zero LED and rotary encoder circuit",
+  "status": "provisional",
+  "source_of_truth": "measured_connections_and_user_report",
+  "schema_purpose": "AI-readable description of the physical circuit",
+  "machine_reading_guidance": {
+    "confirmed_facts_are_in_components_and_nets": true,
+    "do_not_treat_assumptions_as_measured": true,
+    "unknown_values_use_the_string_unknown": true
+  },
+  "board": {
+    "module": "Waveshare RP2040-Zero",
+    "mcu": "RP2040",
+    "logic_voltage": "3.3V"
+  },
+  "components": [
+    {
+      "id": "U1",
+      "type": "mcu_module",
+      "value": "Waveshare RP2040-Zero",
+      "pins": ["GPIO0", "GPIO1", "GPIO2", "GPIO3", "GPIO4", "GPIO5", "GPIO6", "GPIO7", "GPIO8", "GPIO9", "GPIO10", "GPIO11", "GPIO12", "GPIO13", "GPIO27", "GPIO28", "GPIO29", "GND"]
+    },
+    {
+      "id": "R_LED_0_13",
+      "type": "resistor_group",
+      "count": 14,
+      "value_ohm": 430,
+      "marking": "431",
+      "notes": "One resistor per LED; value measured approximately 0.431 kOhm."
+    },
+    {
+      "id": "LED0_13",
+      "type": "led_group",
+      "count": 14,
+      "names": ["LED0", "LED1", "LED2", "LED3", "LED4", "LED5", "LED6", "LED7", "LED8", "LED9", "CODE_LED0", "CODE_LED1", "CODE_LED2", "CODE_LED3"]
+    },
+    {
+      "id": "R_LED_RETURN",
+      "type": "resistor",
+      "value_ohm": 120,
+      "marking": "121",
+      "notes": "One shared return resistor for all 14 LEDs."
+    },
+    {
+      "id": "ENC1",
+      "type": "mechanical_rotary_encoder_with_switch",
+      "value": "EC11-style, exact part unknown",
+      "pins": ["L1", "COMMON", "L2", "B1", "B2"]
+    },
+    {
+      "id": "R_ENC_L1_L2",
+      "type": "resistor_group",
+      "count": 2,
+      "value_ohm": 10000,
+      "marking": "103",
+      "notes": "Measured approximately 9.93 kOhm; exact placement in each filter network not confirmed."
+    },
+    {
+      "id": "R_ENC_B1",
+      "type": "resistor",
+      "value_ohm": 10000,
+      "marking": "103",
+      "notes": "One resistor reported in the B1 input network; placement not confirmed."
+    },
+    {
+      "id": "C_ENC",
+      "type": "capacitor_group",
+      "count": 3,
+      "value": "unknown",
+      "names": ["C_L1", "C_L2", "C_B1"],
+      "notes": "Unmarked ceramic SMD capacitors; values not measured."
+    }
+  ],
+  "nets": [
+    {
+      "id": "LED0_INPUT",
+      "connections": ["U1.GPIO0", "R_LED_0_13[0].1", "LED0.A"]
+    },
+    {
+      "id": "LED1_INPUT",
+      "connections": ["U1.GPIO1", "R_LED_0_13[1].1", "LED1.A"]
+    },
+    {
+      "id": "LED2_INPUT",
+      "connections": ["U1.GPIO2", "R_LED_0_13[2].1", "LED2.A"]
+    },
+    {
+      "id": "LED3_INPUT",
+      "connections": ["U1.GPIO3", "R_LED_0_13[3].1", "LED3.A"]
+    },
+    {
+      "id": "LED4_INPUT",
+      "connections": ["U1.GPIO4", "R_LED_0_13[4].1", "LED4.A"]
+    },
+    {
+      "id": "LED5_INPUT",
+      "connections": ["U1.GPIO5", "R_LED_0_13[5].1", "LED5.A"]
+    },
+    {
+      "id": "LED6_INPUT",
+      "connections": ["U1.GPIO6", "R_LED_0_13[6].1", "LED6.A"]
+    },
+    {
+      "id": "LED7_INPUT",
+      "connections": ["U1.GPIO7", "R_LED_0_13[7].1", "LED7.A"]
+    },
+    {
+      "id": "LED8_INPUT",
+      "connections": ["U1.GPIO8", "R_LED_0_13[8].1", "LED8.A"]
+    },
+    {
+      "id": "LED9_INPUT",
+      "connections": ["U1.GPIO9", "R_LED_0_13[9].1", "LED9.A"]
+    },
+    {
+      "id": "CODE_LED0_INPUT",
+      "connections": ["U1.GPIO10", "R_LED_0_13[10].1", "CODE_LED0.A"]
+    },
+    {
+      "id": "CODE_LED1_INPUT",
+      "connections": ["U1.GPIO11", "R_LED_0_13[11].1", "CODE_LED1.A"]
+    },
+    {
+      "id": "CODE_LED2_INPUT",
+      "connections": ["U1.GPIO12", "R_LED_0_13[12].1", "CODE_LED2.A"]
+    },
+    {
+      "id": "CODE_LED3_INPUT",
+      "connections": ["U1.GPIO13", "R_LED_0_13[13].1", "CODE_LED3.A"]
+    },
+    {
+      "id": "LED_RETURN",
+      "connections": ["LED0.K", "LED1.K", "LED2.K", "LED3.K", "LED4.K", "LED5.K", "LED6.K", "LED7.K", "LED8.K", "LED9.K", "CODE_LED0.K", "CODE_LED1.K", "CODE_LED2.K", "CODE_LED3.K", "R_LED_RETURN.1"]
+    },
+    {
+      "id": "GND",
+      "connections": ["U1.GND", "R_LED_RETURN.2", "ENC1.COMMON", "ENC1.B2"]
+    },
+    {
+      "id": "ENCODER_A",
+      "connections": ["U1.GPIO27", "R_ENC_L1_L2.L1_network", "C_L1", "ENC1.L1"],
+      "confidence": "medium",
+      "notes": "The two 10 kOhm resistors and capacitor are present in the L1 path, but their exact topology is unknown."
+    },
+    {
+      "id": "ENCODER_B",
+      "connections": ["U1.GPIO29", "R_ENC_L1_L2.L2_network", "C_L2", "ENC1.L2"],
+      "confidence": "medium",
+      "notes": "The two 10 kOhm resistors and capacitor are present in the L2 path, but their exact topology is unknown."
+    },
+    {
+      "id": "ENCODER_BUTTON",
+      "connections": ["U1.GPIO28", "R_ENC_B1", "C_B1", "ENC1.B1"],
+      "confidence": "medium",
+      "notes": "One 10 kOhm resistor and one unmarked capacitor are present; exact topology is unknown."
+    }
+  ],
+  "assumptions": [
+    "GPIO0 through GPIO13 map sequentially to the 14 LEDs as reported.",
+    "All 14 LED cathodes/right-side pads join the left side of the 120 Ohm resistor.",
+    "The right side of the 120 Ohm resistor connects to board GND.",
+    "Encoder COMMON and B2 connect to board GND.",
+    "The encoder filter networks are represented as abstract blocks because their physical topology was not established."
+  ],
+  "unknowns": [
+    "C_L1 capacitance",
+    "C_L2 capacitance",
+    "C_B1 capacitance",
+    "Exact placement of the 10 kOhm resistors and capacitors",
+    "Exact EC11 encoder pin numbering and phase orientation"
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "version": 1,
+  "author": "reverse-engineered provisional circuit",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-pi-pico", "id": "pico", "top": 300, "left": 80, "attrs": {} },
+    { "type": "wokwi-ky-040", "id": "encoder", "top": 360, "left": 1840, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_return",
+      "top": 930,
+      "left": 1260,
+      "rotate": 90,
+      "attrs": { "value": "120" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "note_filters",
+      "top": 1030,
+      "left": 1450,
+      "attrs": {
+        "text": "ENCODER FILTER MODEL (topology provisional)\nGPIO27 -> 10k -> 10k -> L1/CLK\nGPIO29 -> 10k -> 10k -> L2/DT\nGPIO28 -> 10k -> B1/SW\nEach unknown capacitor is connected from the encoder node to GND"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "note_leds",
+      "top": 70,
+      "left": 80,
+      "attrs": { "text": "14 LEDs: GPIO0..GPIO13, 430 ohm each, shared 120 ohm return to GND" }
+    },
+    { "type": "wokwi-text", "id": "digit0", "top": 230.4, "left": 1872, "attrs": { "text": "0" } },
+    {
+      "type": "wokwi-text",
+      "id": "digit1",
+      "top": 278.4,
+      "left": 1996.8,
+      "attrs": { "text": "1" }
+    },
+    { "type": "wokwi-text", "id": "digit2", "top": 384, "left": 2054.4, "attrs": { "text": "2" } },
+    {
+      "type": "wokwi-text",
+      "id": "digit3",
+      "top": 470.4,
+      "left": 2044.8,
+      "attrs": { "text": "3" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "digit4",
+      "top": 537.6,
+      "left": 1996.8,
+      "attrs": { "text": "4" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "digit5",
+      "top": 566.4,
+      "left": 1891.2,
+      "attrs": { "text": "5" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "digit6",
+      "top": 547.2,
+      "left": 1795.2,
+      "attrs": { "text": "6" }
+    },
+    { "type": "wokwi-text", "id": "digit7", "top": 489.6, "left": 1728, "attrs": { "text": "7" } },
+    {
+      "type": "wokwi-text",
+      "id": "digit8",
+      "top": 403.2,
+      "left": 1699.2,
+      "attrs": { "text": "8" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "digit9",
+      "top": 297.6,
+      "left": 1737.6,
+      "attrs": { "text": "9" }
+    },
+    {
+     "type": "wokwi-resistor",
+     "id": "filter_l1_r1",
+     "top": 1040,
+     "left": 1450,
+      "attrs": { "value": "10000", "label": "L1 10k" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "filter_l1_r2",
+      "top": 1040,
+      "left": 1600,
+      "attrs": { "value": "10000", "label": "L1 10k" }
+    },
+    {
+      "type": "wokwi-capacitor",
+      "id": "filter_l1_c",
+      "top": 1040,
+      "left": 1750,
+      "attrs": { "capacitance": "100nF", "label": "L1 C unknown" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "filter_l2_r1",
+      "top": 1130,
+      "left": 1450,
+      "attrs": { "value": "10000", "label": "L2 10k" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "filter_l2_r2",
+      "top": 1130,
+      "left": 1600,
+      "attrs": { "value": "10000", "label": "L2 10k" }
+    },
+    {
+      "type": "wokwi-capacitor",
+      "id": "filter_l2_c",
+      "top": 1130,
+      "left": 1750,
+      "attrs": { "capacitance": "100nF", "label": "L2 C unknown" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "filter_b1_r",
+      "top": 1220,
+      "left": 1450,
+      "attrs": { "value": "10000", "label": "B1 10k" }
+    },
+    {
+      "type": "wokwi-capacitor",
+      "id": "filter_b1_c",
+      "top": 1220,
+      "left": 1600,
+      "attrs": { "capacitance": "100nF", "label": "B1 C unknown" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led0",
+      "top": 180,
+      "left": 420,
+      "attrs": { "color": "red", "label": "LED0 GPIO0" }
+    },
+    { "type": "wokwi-resistor", "id": "r0", "top": 180, "left": 330, "attrs": { "value": "430" } },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 180,
+      "left": 560,
+      "attrs": { "color": "red", "label": "LED1 GPIO1" }
+    },
+    { "type": "wokwi-resistor", "id": "r1", "top": 180, "left": 470, "attrs": { "value": "430" } },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 180,
+      "left": 700,
+      "attrs": { "color": "red", "label": "LED2 GPIO2" }
+    },
+    { "type": "wokwi-resistor", "id": "r2", "top": 180, "left": 610, "attrs": { "value": "430" } },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 180,
+      "left": 840,
+      "attrs": { "color": "red", "label": "LED3 GPIO3" }
+    },
+    { "type": "wokwi-resistor", "id": "r3", "top": 180, "left": 750, "attrs": { "value": "430" } },
+    {
+      "type": "wokwi-led",
+      "id": "led4",
+      "top": 180,
+      "left": 980,
+      "attrs": { "color": "red", "label": "LED4 GPIO4" }
+    },
+    { "type": "wokwi-resistor", "id": "r4", "top": 180, "left": 890, "attrs": { "value": "430" } },
+    {
+      "type": "wokwi-led",
+      "id": "led5",
+      "top": 180,
+      "left": 1120,
+      "attrs": { "color": "red", "label": "LED5 GPIO5" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r5",
+      "top": 180,
+      "left": 1030,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led6",
+      "top": 180,
+      "left": 1260,
+      "attrs": { "color": "red", "label": "LED6 GPIO6" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r6",
+      "top": 180,
+      "left": 1170,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led7",
+      "top": 180,
+      "left": 1400,
+      "attrs": { "color": "red", "label": "LED7 GPIO7" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r7",
+      "top": 180,
+      "left": 1310,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led8",
+      "top": 180,
+      "left": 1540,
+      "attrs": { "color": "red", "label": "LED8 GPIO8" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r8",
+      "top": 180,
+      "left": 1450,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led9",
+      "top": 180,
+      "left": 1680,
+      "attrs": { "color": "red", "label": "LED9 GPIO9" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r9",
+      "top": 180,
+      "left": 1590,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led10",
+      "top": 320,
+      "left": 1100,
+      "attrs": { "color": "green", "label": "CODE_LED0 GPIO10" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r10",
+      "top": 320,
+      "left": 1010,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led11",
+      "top": 430,
+      "left": 1100,
+      "attrs": { "color": "green", "label": "CODE_LED1 GPIO11" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r11",
+      "top": 430,
+      "left": 1010,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led12",
+      "top": 540,
+      "left": 1100,
+      "attrs": { "color": "green", "label": "CODE_LED2 GPIO12" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r12",
+      "top": 540,
+      "left": 1010,
+      "attrs": { "value": "430" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led13",
+      "top": 650,
+      "left": 1100,
+      "attrs": { "color": "green", "label": "CODE_LED3 GPIO13" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r13",
+      "top": 650,
+      "left": 1010,
+      "attrs": { "value": "430" }
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "r0:1", "yellow", [] ],
+    [ "r0:2", "led0:A", "yellow", [] ],
+    [ "pico:GP1", "r1:1", "yellow", [] ],
+    [ "r1:2", "led1:A", "yellow", [] ],
+    [ "pico:GP2", "r2:1", "yellow", [] ],
+    [ "r2:2", "led2:A", "yellow", [] ],
+    [ "pico:GP3", "r3:1", "yellow", [] ],
+    [ "r3:2", "led3:A", "yellow", [] ],
+    [ "pico:GP4", "r4:1", "yellow", [] ],
+    [ "r4:2", "led4:A", "yellow", [] ],
+    [ "pico:GP5", "r5:1", "yellow", [] ],
+    [ "r5:2", "led5:A", "yellow", [] ],
+    [ "pico:GP6", "r6:1", "yellow", [] ],
+    [ "r6:2", "led6:A", "yellow", [] ],
+    [ "pico:GP7", "r7:1", "yellow", [] ],
+    [ "r7:2", "led7:A", "yellow", [] ],
+    [ "pico:GP8", "r8:1", "yellow", [] ],
+    [ "r8:2", "led8:A", "yellow", [] ],
+    [ "pico:GP9", "r9:1", "yellow", [] ],
+    [ "r9:2", "led9:A", "yellow", [] ],
+    [ "pico:GP10", "r10:1", "purple", [] ],
+    [ "r10:2", "led10:A", "purple", [] ],
+    [ "pico:GP11", "r11:1", "purple", [] ],
+    [ "r11:2", "led11:A", "purple", [] ],
+    [ "pico:GP12", "r12:1", "purple", [] ],
+    [ "r12:2", "led12:A", "purple", [] ],
+    [ "pico:GP13", "r13:1", "purple", [] ],
+    [ "r13:2", "led13:A", "purple", [] ],
+     [ "led0:C", "led1:C", "green", [] ],
+     [ "led1:C", "led2:C", "green", [] ],
+     [ "led2:C", "led3:C", "green", [] ],
+     [ "led3:C", "led4:C", "green", [] ],
+     [ "led4:C", "led5:C", "green", [] ],
+     [ "led5:C", "led6:C", "green", [] ],
+     [ "led6:C", "led7:C", "green", [] ],
+     [ "led7:C", "led8:C", "green", [] ],
+     [ "led8:C", "led9:C", "green", [] ],
+     [ "led9:C", "led10:C", "green", [] ],
+     [ "led10:C", "led11:C", "green", [] ],
+     [ "led11:C", "led12:C", "green", [] ],
+     [ "led12:C", "led13:C", "green", [] ],
+     [ "led13:C", "r_return:1", "green", [] ],
+    [ "r_return:2", "pico:GND.1", "black", [] ],
+     [ "pico:GP27", "filter_l1_r1:1", "cyan", [] ],
+     [ "filter_l1_r1:2", "filter_l1_r2:1", "cyan", [] ],
+     [ "filter_l1_r2:2", "encoder:CLK", "cyan", [] ],
+     [ "filter_l1_r2:2", "filter_l1_c:1", "cyan", [] ],
+     [ "filter_l1_c:2", "pico:GND.3", "black", [] ],
+     [ "pico:GP29", "filter_l2_r1:1", "magenta", [] ],
+     [ "filter_l2_r1:2", "filter_l2_r2:1", "magenta", [] ],
+     [ "filter_l2_r2:2", "encoder:DT", "magenta", [] ],
+     [ "filter_l2_r2:2", "filter_l2_c:1", "magenta", [] ],
+     [ "filter_l2_c:2", "pico:GND.4", "black", [] ],
+     [ "pico:GP28", "filter_b1_r:1", "yellow", [] ],
+     [ "filter_b1_r:2", "encoder:SW", "yellow", [] ],
+     [ "filter_b1_r:2", "filter_b1_c:1", "yellow", [] ],
+     [ "filter_b1_c:2", "pico:GND.5", "black", [] ],
+    [ "encoder:VCC", "pico:3V3", "red", [] ],
+    [ "encoder:GND", "pico:GND.2", "black", [] ]
+  ],
+  "dependencies": {}
+}
